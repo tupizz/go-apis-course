@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    container_name: devbook-mysqldb
+    ports:
+      - "33306:3306"
+    volumes:
+      - mysqldb:/data
+      - ./infra/mysql:/docker-entrypoint-initdb.d
+    environment:
+      MARIADB_ROOT_PASSWORD: wykx@5jd9
+      MARIADB_DATABASE: devbook
+
+networks:
+  default:
+    driver: bridge
+
+volumes:
+  mysqldb:
+    driver: local
